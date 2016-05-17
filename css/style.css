@@ -1,0 +1,29 @@
+/*CSS源代码*/
+body { 
+	border: 1px solid #dddddd; 
+	margin: 2% 20%; 
+	padding: 2%;
+	font-size: 20px;
+}
+.wrap{ 
+	text-align: center;
+}
+#nums{
+	width: 40%;
+	padding: 2% 30%;
+	float: left;
+}
+#nums li{
+	float: left;
+	width: 25%;
+}
+.start{
+	margin: 10%;
+    padding: 5%;
+}
+.end{
+    position: absolute;
+    margin-left: 2%;
+    margin-top: 2%;
+    padding: 1%;
+}
