@@ -20,10 +20,16 @@ iApp.controller('AddStyleCtrl', function($scope){
     $scope.$watch('sum', function() {
             if($scope.sum == 100){
                 $scope.times.push(parseInt($scope.timeOk));
-                $scope.totalTime += parseInt($scope.timeOk);
+                /*$scope.totalTime += parseInt($scope.timeOk);*/
                 $scope.timeOk = 0;
                 clearAllNums();
-                generate12Nums();
+                if($scope.times.length==3){
+                    generate12NumsNo100();
+                }else if($scope.times.length==4){
+                    stopTimer();
+                }else{
+                    generate12Nums();
+                }           
             }
     });
     $scope.startUp = function(){
@@ -41,10 +47,12 @@ iApp.controller('AddStyleCtrl', function($scope){
     var startTimer = function(){
         $scope.timer=setInterval(function(){
             $scope.timeOk += 0.1;
+            $scope.totalTime += 0.1;
         },100);
     };
     var stopTimer = function(){
         clearInterval($scope.timer);
+        $scope.totalTime = parseInt($scope.totalTime);
         $scope.start = false;
         $scope.result = true;
     };
@@ -60,7 +68,39 @@ iApp.controller('AddStyleCtrl', function($scope){
         }
         return ns;
     };
+    var generate12NumsNo100 = function(){
+        console.log(22);
+        var ns = [];
+        for (var i = 0; i < 6; i++) {
+            var m = Math.floor(Math.random()*49+50);
+            ns.push(m);
+        }
+        for (var i = 0; i < 6; ) {
+            var m = Math.floor(Math.random()*25+25);
+            var j = 0;
+            for (; j < 6; j++) {
+                if (m+ns[j] == 100) {
+                    break;
+                }
+            }
+            if (j == 6) {
+                i++;
+                ns.push(m);
+            }
+        }    
+        ns.sort(function(a,b){ return Math.random()>.5 ? -1 : 1;});
+        var tags = [];
+        for (var i = 0; i<ns.length; i++) {
+            var tag = {
+                    id:i+1,
+                    name:ns[i]
+                };
+            tags.push(tag); 
+        }
+        $scope.tags = tags;     
+    };
     var generateNums100 = function(n){
+        console.log(11);
         var ns = [];
         var num = 0;
         for (var i = 0; i < n-1; i++) {
