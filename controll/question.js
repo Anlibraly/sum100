@@ -13,10 +13,13 @@ iApp.controller('AddStyleCtrl', function($scope){
     $scope.times = [];
     $scope.timeOk = 0;
     $scope.totalTime = 0;
+	$scope.numTo100 = [[85,57,22,48,25,12,64,41,3,16,38,79],[22,56,38,92,48,29,76,15,2,64,81,90],[56,35,24,46,79,33,4,80,57,16,88,63]];
+	$scope.numNoTo100 = [59,84,33,25,90,74,45,64,49,76,87,66];
     $scope.selected = [];
     $scope.selectedTags = [];
     $scope.tags = [];
     $scope.start = false;
+	$scope.numTo100.sort(function(a,b){ return Math.random()>.5 ? -1 : 1;});
     $scope.$watch('sum', function() {
             if($scope.sum == 100){
                 $scope.times.push(parseInt($scope.timeOk));
@@ -69,7 +72,7 @@ iApp.controller('AddStyleCtrl', function($scope){
         return ns;
     };
     var generate12NumsNo100 = function(){
-        console.log(22);
+        /*console.log(22);
         var ns = [];
         for (var i = 0; i < 6; i++) {
             var m = Math.floor(Math.random()*49+50);
@@ -87,7 +90,8 @@ iApp.controller('AddStyleCtrl', function($scope){
                 i++;
                 ns.push(m);
             }
-        }    
+        }*/
+		var ns = $scope.numNoTo100;
         ns.sort(function(a,b){ return Math.random()>.5 ? -1 : 1;});
         var tags = [];
         for (var i = 0; i<ns.length; i++) {
@@ -112,10 +116,11 @@ iApp.controller('AddStyleCtrl', function($scope){
         return ns;
     };
     var generate12Nums = function(){
-        var N = Math.floor(Math.random()*3+3);
+		var n = $scope.times.length;
+        /*var N = Math.floor(Math.random()*3+3);
         var nums = generateNums100(N);
-        var otherNums = randNums(12-N);
-        var numbers = nums.concat(otherNums);
+        var otherNums = randNums(12-N);*/
+        var numbers = $scope.numTo100[n];//nums.concat(otherNums);
         //console.log(numbers);
         numbers.sort(function(a,b){ return Math.random()>.5 ? -1 : 1;});
         var tags = [];
